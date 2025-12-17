@@ -23,6 +23,7 @@ In simple words:
 - UI updates automatically
 
 <h2>2️⃣ Redux Building Blocks (Very Important) </h2>
+
 <h3>1. State </h3>
 
 A struct that represents everything your screen/app needs
@@ -33,3 +34,78 @@ struct AppState {
 }
 ```
 
+<h3>2. Action </h3>
+
+An enum describing what happened
+
+```
+enum AppAction {
+    case increment
+    case decrement
+    case reset
+}
+```
+
+Actions do not contain logic
+They only describe intent
+
+
+<h3>3. Reducer </h3>
+
+A pure function that:
+
+- Takes current state
+
+- Takes an action
+
+- Returns a new state
+
+```
+func appReducer(state: AppState, action: AppAction) -> AppState {
+    var state = state
+
+    switch action {
+    case .increment:
+        state.count += 1
+    case .decrement:
+        state.count -= 1
+    case .reset:
+        state.count = 0
+    }
+
+    return state
+}
+
+```
+
+❗ Reducer rules:
+
+- No async code
+
+- No side effects
+
+- No mutation outside state copy
+
+<h3>4. Store </h3>
+
+The brain of Redux:
+
+- Holds the state
+
+- Exposes dispatch(action)
+
+- Notifies UI when state changes
+
+```
+  final class Store: ObservableObject {
+    @Published private(set) var state: AppState
+
+    init(initial: AppState) {
+        self.state = initial
+    }
+
+    func dispatch(_ action: AppAction) {
+        state = appReducer(state: state, action: action)
+    }
+}
+```
