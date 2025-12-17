@@ -126,3 +126,17 @@ View → Action → Reducer → New State → View
 - No shortcuts.
 - No two-way binding.
 - Very predictable.
+
+<h2>4️⃣ Demo SwiftUI Redux App (Counter App) </h2>
+
+<h3>📁 Project Structure </h3>
+
+```
+ReduxDemo/
+ ├─ AppState.swift
+ ├─ AppAction.swift
+ ├─ AppReducer.swift
+ ├─ Store.swift
+ └─ ContentView.swift
+
+```
