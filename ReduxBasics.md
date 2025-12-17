@@ -109,3 +109,9 @@ The brain of Redux:
     }
 }
 ```
+
+<h3>5. View (SwiftUI) </h3>
+
+- Reads state from Store
+
+- Dispatches actions
