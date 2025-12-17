@@ -115,3 +115,12 @@ The brain of Redux:
 - Reads state from Store
 
 - Dispatches actions
+
+<h2>3️⃣ Redux Data Flow (One Line) </h2>
+```
+View → Action → Reducer → New State → View
+```
+
+- No shortcuts.
+- No two-way binding.
+- Very predictable.
