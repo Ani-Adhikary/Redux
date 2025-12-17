@@ -302,11 +302,11 @@ Redux gives:
 
 <h2>7️⃣ Redux vs MVVM (Quick Comparison) </h2>
 
-MVVM	Redux
-Multiple ViewModels	Single Store
-Two-way binding	One-way flow
-Hard to track changes	Easy to debug
-Good for small screens	Excellent for large apps
+MVVM	Redux <br />
+Multiple ViewModels	Single Store  <br />
+Two-way binding	One-way flow  <br />
+Hard to track changes	Easy to debug  <br />
+Good for small screens	Excellent for large apps  <br />
 
 
 <h3>👉 Best approach: </h3>
