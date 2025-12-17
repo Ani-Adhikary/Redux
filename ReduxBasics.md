@@ -140,3 +140,188 @@ ReduxDemo/
  └─ ContentView.swift
 
 ```
+
+<h3>✅ AppState.swift </h3>
+
+```
+struct AppState {
+    var count: Int = 0
+}
+```
+
+<h3>✅ AppAction.swift </h3>
+
+```
+enum AppAction {
+    case increment
+    case decrement
+    case reset
+}
+```
+
+<h3>✅ AppReducer.swift </h3>
+
+```
+func appReducer(state: AppState, action: AppAction) -> AppState {
+    var state = state
+
+    switch action {
+    case .increment:
+        state.count += 1
+    case .decrement:
+        state.count -= 1
+    case .reset:
+        state.count = 0
+    }
+
+    return state
+}
+```
+
+<h3>✅ Store.swift </h3>
+
+```
+import SwiftUI
+
+final class Store: ObservableObject {
+    @Published private(set) var state: AppState
+
+    init(initial: AppState) {
+        self.state = initial
+    }
+
+    func dispatch(_ action: AppAction) {
+        state = appReducer(state: state, action: action)
+    }
+}
+
+```
+
+<h3>✅ ContentView.swift </h3>
+
+```
+
+import SwiftUI
+
+struct ContentView: View {
+    @StateObject private var store = Store(initial: AppState())
+
+    var body: some View {
+        VStack(spacing: 24) {
+            Text("Redux Counter")
+                .font(.largeTitle.bold())
+
+            Text("\(store.state.count)")
+                .font(.system(size: 60, weight: .bold))
+
+            HStack(spacing: 20) {
+                Button("−") {
+                    store.dispatch(.decrement)
+                }
+
+                Button("+") {
+                    store.dispatch(.increment)
+                }
+            }
+            .font(.title)
+
+            Button("Reset") {
+                store.dispatch(.reset)
+            }
+            .foregroundColor(.red)
+        }
+        .padding()
+    }
+}
+
+```
+
+<h2>5️⃣ Where Are Side Effects in Redux? </h2>
+
+Redux itself does not allow side effects inside reducers.
+
+Examples of side effects:
+
+- API calls
+
+- Firebase reads/writes
+
+- Delays / timers
+
+- Analytics
+
+- Notifications
+
+In SwiftUI Redux, common solutions:
+
+1. Middleware
+
+2. Thunk-style async functions
+
+3. ViewModel → dispatch results back
+
+Example (simple async side effect):
+
+```
+func fetchData(store: Store) {
+    Task {
+        let result = await apiCall()
+        store.dispatch(.dataLoaded(result))
+    }
+}
+
+```
+
+Reducers stay pure 👍
+
+<h2>6️⃣ Why Redux Is Useful (Especially for You) </h2>
+
+For apps like DharmaConnect:
+
+- Favorites
+
+- Auth state
+
+- Subscription state
+
+- Wishlist
+
+- Premium / Free access
+
+- Offline cache
+
+Redux gives:
+
+- One global app state
+
+- Easy debugging
+
+- Easy scaling
+
+- Predictable UI updates
+
+<h2>7️⃣ Redux vs MVVM (Quick Comparison) </h2>
+
+MVVM	Redux
+Multiple ViewModels	Single Store
+Two-way binding	One-way flow
+Hard to track changes	Easy to debug
+Good for small screens	Excellent for large apps
+
+
+<h3>👉 Best approach: </h3>
+
+SwiftUI + Redux-style Store + Feature reducers
+(Exactly what you’re moving toward)
+
+If you want next:
+
+- ✅ Redux with Firebase
+
+- ✅ Redux with Navigation
+
+- ✅ Redux + Middleware
+
+- ✅ Scalable Redux for DharmaConnect
+
+  
