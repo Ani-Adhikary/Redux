@@ -117,6 +117,8 @@ The brain of Redux:
 - Dispatches actions
 
 <h2>3️⃣ Redux Data Flow (One Line) </h2>
+
+
 ```
 View → Action → Reducer → New State → View
 ```
